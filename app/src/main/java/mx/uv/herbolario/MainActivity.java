@@ -15,7 +15,7 @@ import android.widget.Toolbar;
 public class MainActivity extends AppCompatActivity {
     EditText et1, et2;
     private Cursor fila;
-    Button ingresar;
+    Button boton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         et1=(EditText) findViewById(R.id.editText);
         et2=(EditText) findViewById(R.id.editText2);
 
+        boton=(Button) findViewById(R.id.button5);
 
     }
     public void ingresar(View view) {
