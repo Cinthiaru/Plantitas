@@ -11,6 +11,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class AgregarUsuario extends AppCompatActivity {
+
+    /*
+    Holo popo
+     */
+    
     EditText et1, et2, et3, et4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
