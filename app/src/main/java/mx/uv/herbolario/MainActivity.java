@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         boton=(Button) findViewById(R.id.button5);
 
     }
+
     public void ingresar(View view) {
         DBHelper admin = new DBHelper(this, "Herbolario", null, 1);
         SQLiteDatabase db = admin.getWritableDatabase();
