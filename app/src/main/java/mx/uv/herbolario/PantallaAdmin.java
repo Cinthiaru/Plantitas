@@ -12,8 +12,8 @@ public class PantallaAdmin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_admin);
     }
-    public void agregar(View view){
-        Intent agregar= new Intent(this,AgregarUsuario.class);
+    public void usuarios(View view){
+        Intent agregar= new Intent(this,usuarios.class);
         startActivity(agregar);
     }
     public void salir(View view){
