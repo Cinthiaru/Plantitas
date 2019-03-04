@@ -1,5 +1,5 @@
 package mx.uv.herbolario;
-
+/*
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -54,3 +54,4 @@ public class UserList extends AppCompatActivity {
 
     }
 }
+*/

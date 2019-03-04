@@ -42,6 +42,8 @@
         app:layout_constraintVertical_bias="0.289" />
 
     <ListView
+        android:id="@+id/listUsuarios"
+        style="@style/Widget.AppCompat.ListView"
         android:layout_width="299dp"
         android:layout_height="354dp"
         android:layout_marginStart="8dp"
