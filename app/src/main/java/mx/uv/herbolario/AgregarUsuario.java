@@ -15,12 +15,13 @@ public class AgregarUsuario extends AppCompatActivity {
     /*
     Holo popo
      */
-    
+
     EditText et1, et2, et3, et4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_usuario);
+
         et1=(EditText)findViewById(R.id.editText3);
         et2=(EditText)findViewById(R.id.editText4);
         et3=(EditText)findViewById(R.id.editText5);
