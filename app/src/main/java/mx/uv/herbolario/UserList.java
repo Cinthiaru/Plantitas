@@ -1,5 +1,5 @@
 package mx.uv.herbolario;
-/*
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -17,20 +17,19 @@ public class UserList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_list);
+        setContentView(R.layout.activity_usuarios);
 
-        listaUser = (ListView) this.findViewById(R.id.listaUsuarios);
+        listaUser = (ListView) this.findViewById(R.id.listUsuarios);
         cargarListado();
-
     }
 
-    private void cargarListado(){
+    public void cargarListado(){
         listado = listaPersonas();
         ArrayAdapter<String> adapter  = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,listado);
         listaUser.setAdapter(adapter);
     }
 
-    private ArrayList<String> listaPersonas(){
+    public ArrayList<String> listaPersonas(){
         ArrayList<String> datos = new ArrayList<String>();
         DBHelper helper= new DBHelper(this,"Herbolario",null,1);
         SQLiteDatabase db = helper.getReadableDatabase();
@@ -54,4 +53,3 @@ public class UserList extends AppCompatActivity {
 
     }
 }
-*/

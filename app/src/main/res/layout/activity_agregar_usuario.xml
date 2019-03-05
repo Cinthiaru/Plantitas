@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo5"
     tools:context=".AgregarUsuario">
 
     <EditText
@@ -161,8 +162,8 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:background="#075E02"
-        android:text="Aceptar"
         android:onClick="registar"
+        android:text="Aceptar"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -18,6 +18,7 @@ public class usuarios extends AppCompatActivity {
     ListView listaUsuarios;
     ArrayList<String> lista;
     ArrayAdapter adapter;
+    UserList usr= new UserList();
 
     @SuppressLint("ResourceType")
     @Override
@@ -26,36 +27,6 @@ public class usuarios extends AppCompatActivity {
         setContentView(R.layout.activity_usuarios);
         DBHelper db=new DBHelper(getApplicationContext(),null,null,1);
         listaUsuarios =(ListView) findViewById(R.id.listUsuarios);
-        cargarListado();
-    }
-    private void cargarListado(){
-        lista = listaPersonas();
-        ArrayAdapter<String> adapter  = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,lista);
-        listaUsuarios.setAdapter(adapter);
-    }
-
-    private ArrayList<String> listaPersonas(){
-        ArrayList<String> datos = new ArrayList<String>();
-        DBHelper helper= new DBHelper(this,"Herbolario",null,1);
-        SQLiteDatabase db = helper.getReadableDatabase();
-        String sql = "select * from usuarios";
-        Cursor c = db.rawQuery(sql,null);
-
-        if (c.moveToFirst()) {
-            do{
-                String linea = "Nombre: "+c.getString(1)+ " " +
-                        c.getString(2)+"\n"
-                        +"Usuario: " + c.getString(3) + "\n"
-                        +"Contraseña: " + c.getString(4)+ "\n"
-                        + "Tipo usuario: " + c.getString(5);
-                datos.add(linea);
-
-            }while(c.moveToNext());
-
-        }
-        db.close();
-        return datos;
-
     }
 
     public void agregar(View view){
