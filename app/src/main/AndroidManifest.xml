@@ -19,7 +19,8 @@
         <activity android:name=".PantallaAdmin" />
         <activity android:name=".AgregarUsuario" />
         <activity android:name=".PantallaUsuario" />
-        <activity android:name=".usuarios"></activity>
+        <activity android:name=".usuarios" />
+        <activity android:name=".Editar"></activity>
     </application>
 
 </manifest>

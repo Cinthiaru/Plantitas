@@ -14,6 +14,7 @@ public class AgregarUsuario extends AppCompatActivity {
 
     EditText et1, et2, et3, et4;
     UsuariosOperaciones usr=new UsuariosOperaciones(this);
+    Usuario us;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,7 @@ public class AgregarUsuario extends AppCompatActivity {
         String tipo= et4.getText().toString();
 
         usr.open();
-        usr.addUsuario(nombre,usuario,contrasena,tipo);
+        us=usr.addUsuario(nombre,usuario,contrasena,tipo);
         usr.close();
 
         Toast.makeText(getApplicationContext(),"Usuario creado",Toast.LENGTH_LONG).show();

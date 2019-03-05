@@ -80,11 +80,11 @@ public class UsuariosOperaciones {
         long usuarioId = database.insert(DataBaseHelper.USUARIO, null, values);
     }
 
-    public void deleteFarmacia(Usuario comment) {
-        long id = comment.getId();
+    public void deleteUsuario(Usuario comment) {
+        /*long id = comment.getId();
         System.out.println("Comment deleted with id: " + id);
         database.delete(DataBaseHelper.USUARIO, DataBaseHelper.USUARIO_ID
-                + " = " + id, null);
+                + " = " + id, null);*/
     }
 
     public List<String> getAllUsuarios() {
