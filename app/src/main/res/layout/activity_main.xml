@@ -83,7 +83,7 @@
         app:layout_constraintVertical_bias="0.609" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/btnIngresar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -92,7 +92,6 @@
         android:layout_marginBottom="8dp"
         android:background="#075E02"
         android:elevation="10dp"
-        android:onClick="ingresar"
         android:text="Entrar"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
