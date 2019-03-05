@@ -32,19 +32,15 @@ public class UserList extends AppCompatActivity {
     public ArrayList<String> listaPersonas(){
         ArrayList<String> datos = new ArrayList<String>();
         DBHelper helper= new DBHelper(this,"Herbolario",null,1);
-        SQLiteDatabase db = helper.getReadableDatabase();
-        String sql = "select * from usuarios";
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String sql = "select nombre,usuario from usuarios";
         Cursor c = db.rawQuery(sql,null);
 
         if (c.moveToFirst()) {
             do{
-                String linea = "Nombre: "+c.getString(1)+ " " +
-                        c.getString(2)+"\n"
-                        +"Usuario: " + c.getString(3) + "\n"
-                        +"Contraseña: " + c.getString(4)+ "\n"
-                        + "Tipo usuario: " + c.getString(5);
+                String linea = "Nombre: "+c.getString(1)+ " "
+                        +"Usuario: " + c.getString(2);
                 datos.add(linea);
-
             }while(c.moveToNext());
 
         }
