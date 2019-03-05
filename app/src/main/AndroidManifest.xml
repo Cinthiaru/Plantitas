@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".PantallaAdmin" />
         <activity android:name=".AgregarUsuario" />
-        <activity android:name=".PantallaUsuario"></activity>
+        <activity android:name=".PantallaUsuario" />
+        <activity android:name=".usuarios"></activity>
     </application>
 
 </manifest>
