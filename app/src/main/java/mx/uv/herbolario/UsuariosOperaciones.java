@@ -26,6 +26,7 @@ public class UsuariosOperaciones {
     public void close() {
         dbHelper.close();
     }
+    //Busca donde el usuarios y el password sean iguales y se trae el rol
     public String login(String usuario, String password){
         String rol="";
         String whereClause = "_usuario = ? AND _password = ?";
@@ -42,6 +43,7 @@ public class UsuariosOperaciones {
         cursor.close();
         return rol;
     }
+
     public Usuario addUsuario(String nombre, String usuario, String contrasena, String rol) {
 
         ContentValues values = new ContentValues();
@@ -60,10 +62,11 @@ public class UsuariosOperaciones {
 
         cursor.moveToFirst();
 
-        Usuario newComment = parseFarmacia(cursor);
+        Usuario newComment = parseUsuario(cursor);
         cursor.close();
         return newComment;
     }
+
     public void UsuarioDefault() {
 
         ContentValues values = new ContentValues();
@@ -74,7 +77,6 @@ public class UsuariosOperaciones {
         values.put(DataBaseHelper.USUARIO_ROL,"admin");
 
         long usuarioId = database.insert(DataBaseHelper.USUARIO, null, values);
-
     }
 
     public void deleteFarmacia(Usuario comment) {
@@ -84,24 +86,22 @@ public class UsuariosOperaciones {
                 + " = " + id, null);
     }
 
-    public List<Usuario> getAllFarmacia() {
-        List<Usuario> FARMACIA = new ArrayList<Usuario>();
+    public List<String> getAllUsuarios() {
+        List<String> USUARIO = new ArrayList<String>();
 
         Cursor cursor = database.query(DataBaseHelper.USUARIO,
-                USUARIOS_TABLE_COLUMNS, null, null, null, null, null);
+                new String[]{DataBaseHelper.USUARIO_USU}, null, null, null, null, null);
 
         cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            Usuario farmacia = parseFarmacia(cursor);
-            FARMACIA.add(farmacia);
+        do{
+            USUARIO.add(cursor.getString(0));
             cursor.moveToNext();
-        }
-
+        }while(cursor.moveToNext());
         cursor.close();
-        return FARMACIA;
+        return USUARIO;
     }
 
-    private Usuario parseFarmacia(Cursor cursor) {
+    private Usuario parseUsuario(Cursor cursor) {
         Usuario usuario = new Usuario();
         usuario.setId((cursor.getInt(0)));
         usuario.setNombre(cursor.getString(1));

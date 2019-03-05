@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         setContentView(R.layout.activity_main);
         usuariosdb = new UsuariosOperaciones(this);
         usuariosdb.open();
-        usuariosdb.UsuarioDefault();
         txtUsuario=this.findViewById(R.id.editText);
         txtPassword=this.findViewById(R.id.editText2);
         btnIngresar=this.findViewById(R.id.btnIngresar);
@@ -33,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         String usuario = txtUsuario.getText().toString();
         String contrasena = txtPassword.getText().toString();
         String existeUsuario= usuariosdb.login(usuario, contrasena);
-        
         if(existeUsuario.equals("admin")){
             Intent ven = new Intent(this, PantallaAdmin.class);
             startActivity(ven);
