@@ -6,18 +6,19 @@ public class Planta {
     private String nombre;
     private String nombreCientifico;
     private String familia;
+    private String usos;
     private String descripcion;
     private String propiedades;
     private String contraindicaciones;
-    private byte[] imagen;
+    private String imagen;
+    //private byte[] imagen;
 
-    public Planta(int id, String nombre, String nombreCientifico, String familia,
-                  String descripcion, String propiedades, String contraindicaciones,
-                  byte[] image) {
+    public Planta(int id, String nombre, String nombreCientifico, String familia, String usos, String descripcion, String propiedades, String contraindicaciones, String imagen) {
         this.id = id;
         this.nombre = nombre;
         this.nombreCientifico = nombreCientifico;
         this.familia = familia;
+        this.usos = usos;
         this.descripcion = descripcion;
         this.propiedades = propiedades;
         this.contraindicaciones = contraindicaciones;
@@ -56,6 +57,14 @@ public class Planta {
         this.familia = familia;
     }
 
+    public String getUsos() {
+        return usos;
+    }
+
+    public void setUsos(String usos) {
+        this.usos = usos;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
@@ -80,11 +89,11 @@ public class Planta {
         this.contraindicaciones = contraindicaciones;
     }
 
-    public byte[] getImagen() {
+    public String getImagen() {
         return imagen;
     }
 
-    public void setImagen(byte[] imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }
 }
