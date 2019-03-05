@@ -26,6 +26,7 @@ public class UsuariosOperaciones {
     public void close() {
         dbHelper.close();
     }
+
     //Busca donde el usuarios y el password sean iguales y se trae el rol
     public String login(String usuario, String password){
         String rol="";
@@ -54,7 +55,6 @@ public class UsuariosOperaciones {
         values.put(DataBaseHelper.USUARIO_ROL,rol);
 
         long usuarioId = database.insert(DataBaseHelper.USUARIO, null, values);
-
         // now that the USUARIO is created return it ...
         Cursor cursor = database.query(DataBaseHelper.USUARIO,
                 USUARIOS_TABLE_COLUMNS, DataBaseHelper.USUARIO_ID + " = "
@@ -65,6 +65,7 @@ public class UsuariosOperaciones {
         Usuario newComment = parseUsuario(cursor);
         cursor.close();
         return newComment;
+
     }
 
     public void UsuarioDefault() {
@@ -79,11 +80,11 @@ public class UsuariosOperaciones {
         long usuarioId = database.insert(DataBaseHelper.USUARIO, null, values);
     }
 
-    public void deleteFarmacia(Usuario comment) {
-        long id = comment.getId();
+    public void deleteUsuario(Usuario comment) {
+        /*long id = comment.getId();
         System.out.println("Comment deleted with id: " + id);
         database.delete(DataBaseHelper.USUARIO, DataBaseHelper.USUARIO_ID
-                + " = " + id, null);
+                + " = " + id, null);*/
     }
 
     public List<String> getAllUsuarios() {

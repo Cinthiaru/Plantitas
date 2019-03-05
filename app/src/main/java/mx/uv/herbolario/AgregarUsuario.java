@@ -13,6 +13,8 @@ import android.widget.Toast;
 public class AgregarUsuario extends AppCompatActivity {
 
     EditText et1, et2, et3, et4;
+    UsuariosOperaciones usr=new UsuariosOperaciones(this);
+    Usuario us;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,25 +26,18 @@ public class AgregarUsuario extends AppCompatActivity {
         et4=(EditText)findViewById(R.id.editText6);
     }
     public void registar(View view){
-        DBHelper admin= new DBHelper(this,"Herbolario",null,1);
-        SQLiteDatabase db=admin.getWritableDatabase();
         String nombre= et1.getText().toString();
         String usuario= et2.getText().toString();
         String contrasena= et3.getText().toString();
         String tipo= et4.getText().toString();
 
-        ContentValues values= new ContentValues();
-        values.put("nombre",nombre);
-        values.put("usuario",usuario);
-        values.put("contrasena",contrasena);
-        values.put("tipo",tipo);
-
-        db.insert("usuarios",null,values);
-        db.close();
+        usr.open();
+        us=usr.addUsuario(nombre,usuario,contrasena,tipo);
+        usr.close();
 
         Toast.makeText(getApplicationContext(),"Usuario creado",Toast.LENGTH_LONG).show();
 
-        Intent ventana= new Intent(this, MainActivity.class);
+        Intent ventana= new Intent(this, usuarios.class);
         startActivity(ventana);
 
         }

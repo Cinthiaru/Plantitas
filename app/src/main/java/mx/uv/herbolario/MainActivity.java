@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         String usuario = txtUsuario.getText().toString();
         String contrasena = txtPassword.getText().toString();
         String existeUsuario= usuariosdb.login(usuario, contrasena);
+
         if(existeUsuario.equals("admin")){
             Intent ven = new Intent(this, PantallaAdmin.class);
             startActivity(ven);
