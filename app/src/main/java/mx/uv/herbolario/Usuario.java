@@ -4,12 +4,8 @@ public class Usuario {
     int id;
     public String nombre;
     public String user;
-
-    public Usuario(String nombre, String user ){
-        this.id=id;
-        this.nombre=nombre;
-        this.user=user;
-    }
+    public String password;
+    public String rol;
 
     public void setId(int id) {
         this.id = id;
@@ -33,5 +29,21 @@ public class Usuario {
 
     public String getUser() {
         return user;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public String getRol() {
+        return rol;
     }
 }
