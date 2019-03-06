@@ -61,25 +61,20 @@ public class PlantasOperaciones {
         return newComment;
     }
 
-    public ArrayList<String> getAllPlantas() {
-        ArrayList<String> PLANTA = new ArrayList<String>();
-        Cursor cursor = database.query(DataBaseHelper.USUARIO,
+    public List<String> getAllPlantas() {
+        List<String> PLANTA = new ArrayList<String>();
+        Cursor cursor = database.query(DataBaseHelper.PLANTA,
                 new String[]{DataBaseHelper.PLANTA_NOMBRE}, null, null, null, null, null);
         cursor.moveToFirst();
-        do{
-            String linea =
-                    "Nombre: " + cursor.getString(1) + "\n" +
-                            "Nombre científico: " + cursor.getString(2) + "\n" +
-                            "Familia: " + cursor.getString(3) + "\n" +
-                            "Usos: " + cursor.getString(4) + "\n" +
-                            "Descripción: " + cursor.getString(5) + "\n" +
-                            "Propiedades: " + cursor.getString(6) + "\n" +
-                            "Contraindicaciones: " + cursor.getString(7) + "\n" +
-                            "Imagen: " + cursor.getString(8);
-            PLANTA.add(linea);
-            cursor.moveToNext();
-        }while(cursor.moveToNext());
-        cursor.close();
+            do{
+                String linea =
+                        "Nombre: " + cursor.getString(0) ;
+                PLANTA.add(linea);
+                cursor.moveToNext();
+            }while(cursor.moveToNext());
+
+            cursor.close();
+
         return PLANTA;
     }
 

@@ -47,12 +47,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             + "(" + PLANTA_ID + " integer primary key autoincrement, "
             + PLANTA_NOMBRE + " text not null,"
             + PLANTA_NOMBRECIENT + " text not null,"
-            + PLANTA_FAMILIA + " text not null,"
-            + PLANTA_USOS + " text not null,"
-            + PLANTA_DESCRIPCION + " text not null,"
-            + PLANTA_PROPIEDADES + " text not null,"
-            + PLANTA_CONTRAINDI + " text not null,"
-            + PLANTA_IMAGEN + " text not null);";
+            + PLANTA_FAMILIA + " text,"
+            + PLANTA_USOS + " text ,"
+            + PLANTA_DESCRIPCION + " text ,"
+            + PLANTA_PROPIEDADES + " text,"
+            + PLANTA_CONTRAINDI + " text ,"
+            + PLANTA_IMAGEN + " text );";
             //+ PLANTA_IMAGEN + " blob not null);";
 
 
@@ -64,6 +64,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             +USUARIO_ROL+")"
             + "values ('admin', 'admin', 'admin', 'admin');";
 
+    private static final String DATABASE_PLANTA = "insert into " + PLANTA
+            +"(" +PLANTA_NOMBRE+","
+            +PLANTA_NOMBRECIENT+","
+            +PLANTA_FAMILIA+","
+            +PLANTA_PROPIEDADES+")"
+            + "values ('Ruda', 'sdbhhbds', 'arbusto', 'es muy ruda');";
+
     //Contexto
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -74,6 +81,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL(DATABASE_CREATE);
         db.execSQL(DATABASE_CREATE_TWO);
         db.execSQL(DATABASE_USER);
+        db.execSQL(DATABASE_PLANTA );
     }
 
     @Override

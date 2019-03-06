@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".plantasList"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +21,7 @@
         <activity android:name=".AgregarUsuario" />
         <activity android:name=".PantallaUsuario" />
         <activity android:name=".usuarios" />
-        <activity android:name=".Editar"></activity>
+        <activity android:name=".Editar" />
     </application>
 
 </manifest>

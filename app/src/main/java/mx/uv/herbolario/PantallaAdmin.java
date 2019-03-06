@@ -21,7 +21,7 @@ public class PantallaAdmin extends AppCompatActivity {
         startActivity(salir);
     }
     public void plantas(View view){
-        Intent ventana= new Intent(this,plantas.class);
+        Intent ventana= new Intent(this,plantasList.class);
         startActivity(ventana);
     }
 }
