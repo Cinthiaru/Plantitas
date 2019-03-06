@@ -34,6 +34,10 @@ public class AgregarPlanta extends AppCompatActivity {
     EditText edtContraindicaciones;
     EditText edtImagen;
 
+    PlantasOperaciones pla=new PlantasOperaciones(this);
+
+    Planta pl;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +54,6 @@ public class AgregarPlanta extends AppCompatActivity {
     }
 
     public void registarPlanta(View view){
-        DBHelper admin= new DBHelper(this,"Herbolario",null,1);
-        SQLiteDatabase db=admin.getWritableDatabase();
         String nombre = edtNombre.getText().toString();
         String nombreCientifico = edtNombreCientifico.getText().toString();
         String familia = edtFamilia.getText().toString();
@@ -61,29 +63,15 @@ public class AgregarPlanta extends AppCompatActivity {
         String contraindicaciones = edtContraindicaciones.getText().toString();
         String imagen = edtImagen.getText().toString();
 
-        ContentValues values= new ContentValues();
-        values.put("nombre",nombre);
-        values.put("nombreCientifico",nombreCientifico);
-        values.put("familia",familia);
-        values.put("usos",usos);
-        values.put("descripcion",descripcion);
-        values.put("propiedades",propiedades);
-        values.put("contraindicaciones",contraindicaciones);
-        values.put("imagen",imagen);
+        pla.open();
+        pl=pla.addPlanta(nombre, nombreCientifico, familia, usos, descripcion, propiedades, contraindicaciones, imagen);
+        pla.close();
 
-        db.insert("planta",null,values);
-        db.close();
+        Toast.makeText(getApplicationContext(),"Registro exitoso.",Toast.LENGTH_LONG).show();
 
-        Toast.makeText(getApplicationContext(),"Planta creado",Toast.LENGTH_LONG).show();
-
-        Intent ventana= new Intent(this, MainActivity.class);
+        Intent ventana= new Intent(this, usuarios.class);
         startActivity(ventana);
 
     }
-
-
-
-
-
 
 }

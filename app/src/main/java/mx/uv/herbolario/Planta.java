@@ -13,17 +13,6 @@ public class Planta {
     private String imagen;
     //private byte[] imagen;
 
-    public Planta(int id, String nombre, String nombreCientifico, String familia, String usos, String descripcion, String propiedades, String contraindicaciones, String imagen) {
-        this.id = id;
-        this.nombre = nombre;
-        this.nombreCientifico = nombreCientifico;
-        this.familia = familia;
-        this.usos = usos;
-        this.descripcion = descripcion;
-        this.propiedades = propiedades;
-        this.contraindicaciones = contraindicaciones;
-        this.imagen = imagen;
-    }
 
     public int getId() {
         return id;
