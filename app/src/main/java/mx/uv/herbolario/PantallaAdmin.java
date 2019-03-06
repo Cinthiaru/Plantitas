@@ -20,4 +20,8 @@ public class PantallaAdmin extends AppCompatActivity {
         Intent salir= new Intent(this,MainActivity.class);
         startActivity(salir);
     }
+    public void plantas(View view){
+        Intent ventana= new Intent(this,plantas.class);
+        startActivity(ventana);
+    }
 }

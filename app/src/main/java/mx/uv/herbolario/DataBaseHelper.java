@@ -10,7 +10,7 @@ import java.sql.Blob;
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     //Bloque apartado de Usuario
-    public static final String USUARIO = "USUARIOS";
+    public static final String USUARIO = "USUARIO";
     public static final String USUARIO_ID = "_id";
     public static final String USUARIO_NOMBRE = "_nombre";
     public static final String USUARIO_PASSWORD = "_password";
@@ -18,7 +18,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String USUARIO_ROL = "_rol";
 
     //Bloque apartado de Planta
-    public static final String PLANTA = "USUARIOS";
+    public static final String PLANTA = "PLANTA";
     public static final String PLANTA_ID = "_id";
     public static final String PLANTA_NOMBRE = "_nombre";
     public static final String PLANTA_NOMBRECIENT = "_nombreCientifico";
