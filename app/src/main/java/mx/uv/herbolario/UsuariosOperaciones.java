@@ -101,12 +101,12 @@ public class UsuariosOperaciones {
         return USUARIO;
     }
 
-    public boolean updateUsuarios(String nombre, String usuario, String contrasena){
+    public boolean updateUsuarios(int id, String nombre, String usuario, String contrasena){
         ContentValues cv = new ContentValues();
         cv.put(DataBaseHelper.USUARIO_NOMBRE,nombre);
         cv.put(DataBaseHelper.USUARIO_USU,usuario);
         cv.put(DataBaseHelper.USUARIO_PASSWORD,contrasena);
-        boolean resultado= database.update(DataBaseHelper.USUARIO, cv, DataBaseHelper.USUARIO_USU + "='" + nombre + "'", null)>0;
+        boolean resultado= database.update(DataBaseHelper.USUARIO, cv, DataBaseHelper.USUARIO_ID + "='" + id + "'", null)>0;
         return  resultado;
     }
 
