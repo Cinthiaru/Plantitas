@@ -72,7 +72,7 @@ public class PlantasOperaciones {
                 PLANTA.add(linea);
             }while (cursor.moveToNext());
         }
-            cursor.close();
+        cursor.close();
 
         return PLANTA;
     }
