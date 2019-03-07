@@ -13,6 +13,7 @@ public class Editar extends AppCompatActivity implements View.OnClickListener{
     EditText nombreUsuario;
     EditText name;
     EditText contrasena;
+    int id=0;
     Button btnActualizar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +42,14 @@ public class Editar extends AppCompatActivity implements View.OnClickListener{
         name.setText(us.getNombre());
         nombreUsuario.setText(us.getUser());
         contrasena.setText(us.getPassword());
+        id = us.getId();
     }
 
     public void Editar(){
         String nombre = name.getText().toString();
         String usuario = nombreUsuario.getText().toString();
         String contra = contrasena.getText().toString();
-        if(usu.updateUsuarios(nombre, usuario, contra)){
+        if(usu.updateUsuarios(id, nombre, usuario, contra)){
             Toast.makeText(getApplicationContext(),"Actualización exitosa.",Toast.LENGTH_LONG).show();
         }
         Intent ventana= new Intent(this, usuarios.class);
