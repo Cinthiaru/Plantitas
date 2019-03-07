@@ -25,6 +25,7 @@ import java.io.InputStream;
 
 public class AgregarPlanta extends AppCompatActivity {
 
+    //EditText a utilizar ok
     EditText edtNombre;
     EditText edtNombreCientifico;
     EditText edtFamilia;
@@ -33,6 +34,9 @@ public class AgregarPlanta extends AppCompatActivity {
     EditText edtPropiedades;
     EditText edtContraindicaciones;
     EditText edtImagen;
+
+    Button botonImagen;
+    final int REQUEST_CODE_GALLERY = 999;
 
     PlantasOperaciones pla=new PlantasOperaciones(this);
 
@@ -43,6 +47,7 @@ public class AgregarPlanta extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_planta);
 
+        botonImagen = (Button) findViewById(R.id.botonCargarImagen);
         edtNombre = (EditText) findViewById(R.id.editTextNombre);
         edtNombreCientifico = (EditText) findViewById(R.id.editTextNombreCientifico);
         edtFamilia = (EditText) findViewById(R.id.editTextFamilia);
@@ -51,6 +56,17 @@ public class AgregarPlanta extends AppCompatActivity {
         edtPropiedades = (EditText) findViewById(R.id.editTextPropiedades);
         edtContraindicaciones = (EditText) findViewById(R.id.editTextContraindicaciones);
         edtImagen = (EditText) findViewById(R.id.editTextImagen);
+
+        botonImagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityCompat.requestPermissions(
+                        AgregarPlanta.this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        REQUEST_CODE_GALLERY
+                );
+            }
+        });
     }
 
     public void registarPlanta(View view){
