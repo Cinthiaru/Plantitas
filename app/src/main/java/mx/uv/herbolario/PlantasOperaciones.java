@@ -61,19 +61,20 @@ public class PlantasOperaciones {
         return newComment;
     }
 
+    public void deletePlanta(String seleccionado) {
+        database.execSQL("DELETE FROM PLANTA WHERE _nombre ='" + seleccionado+"'");
+    }
+
     public List<String> getAllPlantas() {
         List<String> PLANTA = new ArrayList<String>();
         Cursor cursor = database.query(DataBaseHelper.PLANTA,
                 new String[]{DataBaseHelper.PLANTA_NOMBRE}, null, null, null, null, null);
         if(cursor.moveToFirst()) {
-            while (cursor.moveToNext()) {
-                String linea =
-                        "Nombre: " + cursor.getString(0);
-                PLANTA.add(linea);
-                cursor.moveToNext();
-            }
+            do {
+                PLANTA.add(cursor.getString(0));
+            }while (cursor.moveToNext());
         }
-            cursor.close();
+        cursor.close();
 
         return PLANTA;
     }

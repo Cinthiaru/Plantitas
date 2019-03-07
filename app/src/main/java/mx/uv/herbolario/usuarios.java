@@ -21,14 +21,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class usuarios extends AppCompatActivity {
+public class usuarios extends AppCompatActivity implements ListView.OnItemClickListener {
 
     ListView listaUsuarios;
     ArrayAdapter<String> adapter;
     private UsuariosOperaciones usuariosdb;
-    private int seleccionado = -1;
     private Object action;
-    UsuariosOperaciones usr=new UsuariosOperaciones(this);
 
     @SuppressLint("ResourceType")
     @Override
@@ -40,6 +38,8 @@ public class usuarios extends AppCompatActivity {
         listaUsuarios = this.findViewById(R.id.listUsuarios);
         LlenarListaUsuarios();
         borrar();
+
+
     }
 
     public void LlenarListaUsuarios() {
@@ -47,54 +47,21 @@ public class usuarios extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, usuarios);
         listaUsuarios.setAdapter(adapter);
     }
-   //PARA SELECCIONAR ACCION AL PRESIONAR BOTON
+   //PARA SELECCIONAR ACCION AL PRESIONAR EL ITEM
     public void borrar() {
-        listaUsuarios.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        listaUsuarios.setLongClickable(true);
         listaUsuarios.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                seleccionado = position;
-                action = usuarios.this.startActionMode(amc);
-                view.setSelected(true);
+                //COMO EL ADMIN TIENE ID 1 ENTONCES LE SUMO A LA POSICION//
+                int seleccionado = position+1;
+                usuariosdb.deleteUsuario(seleccionado);
+                Toast.makeText(getApplicationContext(), "Usuario eliminado", Toast.LENGTH_LONG).show();
                 return true;
             }
         });
-
+        listaUsuarios.setOnItemClickListener(this);
     }
-
-    private ActionMode.Callback amc = new ActionMode.Callback() {
-        @Override
-        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            getMenuInflater().inflate(R.menu.opciones, menu);
-            return true;
-        }
-
-        @Override
-        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-
-            return false;
-        }
-
-        @Override
-        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            if (item.getItemId() == R.id.EliminarItem) {
-                //LLAMA AL METODO ELIMINAR//
-
-                Toast.makeText(getApplicationContext(), "Usuario borrado", Toast.LENGTH_LONG).show();
-            //LLAMA A LA PANTALLA DE EDITAR//
-            } else if (item.getItemId() == R.id.EditarItem) {
-                Intent edit=new Intent(usuarios.this,Editar.class);
-                startActivity(edit);
-                mode.finish();
-            }
-            return false;
-        }
-
-        @Override
-        public void onDestroyActionMode(ActionMode mode) {
-
-        }
-    };
 
     public void agregar(View view){
         Intent agregar= new Intent(this,AgregarUsuario.class);
@@ -103,5 +70,10 @@ public class usuarios extends AppCompatActivity {
     public void atras(View vw){
         Intent agregar= new Intent(this,PantallaAdmin.class);
         startActivity(agregar);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
     }
 }

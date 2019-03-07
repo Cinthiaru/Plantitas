@@ -64,13 +64,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             +USUARIO_ROL+")"
             + "values ('admin', 'admin', 'admin', 'admin');";
 
-    private static final String DATABASE_PLANTA = "insert into " + PLANTA
-            +"(" +PLANTA_NOMBRE+","
-            +PLANTA_NOMBRECIENT+","
-            +PLANTA_FAMILIA+","
-            +PLANTA_PROPIEDADES+")"
-            + "values ('Ruda', 'sdbhhbds', 'arbusto', 'es muy ruda');";
-
     //Contexto
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -81,7 +74,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL(DATABASE_CREATE);
         db.execSQL(DATABASE_CREATE_TWO);
         db.execSQL(DATABASE_USER);
-        db.execSQL(DATABASE_PLANTA );
     }
 
     @Override
