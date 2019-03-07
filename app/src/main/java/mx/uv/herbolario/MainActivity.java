@@ -27,6 +27,11 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         btnIngresar.setOnClickListener(this);
     }
 
+    public void cargarVistaAnonimo(View view){
+        Intent anonimo= new Intent(this, Invitados.class);
+        startActivity(anonimo);
+    }
+
     @Override
     public void onClick(View v) {
         String usuario = txtUsuario.getText().toString();
@@ -47,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
             txtUsuario.setText("");
             txtPassword.setText("");
             Toast.makeText(getApplicationContext(), "Usuario encontrado", Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(getApplicationContext(), "Usuario no encontrado", Toast.LENGTH_LONG).show();
         }
 
     }

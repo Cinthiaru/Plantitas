@@ -29,8 +29,8 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="102dp"
-        android:layout_height="104dp"
+        android:layout_width="82dp"
+        android:layout_height="83dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -39,12 +39,12 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/usuarios"
         android:onClick="usuarios"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.248" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.948" />
 
     <TextView
         android:id="@+id/textView4"
@@ -87,8 +87,8 @@
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="105dp"
-        android:layout_height="108dp"
+        android:layout_width="87dp"
+        android:layout_height="86dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -97,12 +97,12 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/wheat"
         android:onClick="plantas"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.627" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.906" />
 
     <Button
         android:id="@+id/button4"

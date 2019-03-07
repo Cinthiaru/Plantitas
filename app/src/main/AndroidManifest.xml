@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AgregarPlanta"></activity>
+        <activity android:name=".verDetalles"></activity>
+        <activity android:name=".Invitados" />
+        <activity android:name=".AgregarPlanta" />
         <activity android:name=".plantasList" />
         <activity android:name=".MainActivity">
             <intent-filter>
