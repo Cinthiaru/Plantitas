@@ -61,6 +61,25 @@ public class PlantasOperaciones {
         return newComment;
     }
 
+    public boolean updatePlanta(int id, String nombre, String nombreCientifico, String familia, String usos,
+                             String descripcion, String propiedades, String contraindicaciones,
+                             String imagen){
+        ContentValues values = new ContentValues();
+
+        values.put(DataBaseHelper.PLANTA_NOMBRE, nombre);
+        values.put(DataBaseHelper.PLANTA_NOMBRECIENT, nombreCientifico);
+        values.put(DataBaseHelper.PLANTA_FAMILIA, familia);
+        values.put(DataBaseHelper.PLANTA_USOS, usos);
+        values.put(DataBaseHelper.PLANTA_DESCRIPCION, descripcion);
+        values.put(DataBaseHelper.PLANTA_PROPIEDADES, propiedades);
+        values.put(DataBaseHelper.PLANTA_CONTRAINDI, contraindicaciones);
+        values.put(DataBaseHelper.PLANTA_IMAGEN, imagen);
+
+        boolean estado = database.update(DataBaseHelper.PLANTA, values, DataBaseHelper.PLANTA_ID + "='" + id + "'", null)>0;
+
+        return estado;
+    }
+
     public void deletePlanta(String seleccionado) {
         database.execSQL("DELETE FROM PLANTA WHERE _nombre ='" + seleccionado+"'");
     }
@@ -77,6 +96,18 @@ public class PlantasOperaciones {
         cursor.close();
 
         return PLANTA;
+    }
+
+    public Planta getPlanta(String nombre) {
+        Cursor cursor = database.rawQuery("SELECT * FROM PLANTA WHERE _nombre='"+nombre+"'",null);
+        Planta planta = new Planta();
+        //Nos movemos al primer registro de la consulta
+        if (cursor.moveToFirst()) {
+            planta = parsePlanta(cursor);
+        }
+        cursor.close();
+
+        return planta;
     }
 
     private Planta parsePlanta(Cursor cursor) {

@@ -27,6 +27,7 @@ public class usuarios extends AppCompatActivity implements ListView.OnItemClickL
     ArrayAdapter<String> adapter;
     private UsuariosOperaciones usuariosdb;
     private Object action;
+    int seleccionado;
 
     @SuppressLint("ResourceType")
     @Override
@@ -38,8 +39,6 @@ public class usuarios extends AppCompatActivity implements ListView.OnItemClickL
         listaUsuarios = this.findViewById(R.id.listUsuarios);
         LlenarListaUsuarios();
         borrar();
-
-
     }
 
     public void LlenarListaUsuarios() {
@@ -49,19 +48,55 @@ public class usuarios extends AppCompatActivity implements ListView.OnItemClickL
     }
    //PARA SELECCIONAR ACCION AL PRESIONAR EL ITEM
     public void borrar() {
-        listaUsuarios.setLongClickable(true);
+        listaUsuarios.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
         listaUsuarios.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                //COMO EL ADMIN TIENE ID 1 ENTONCES LE SUMO A LA POSICION//
-                String nombre= (String)listaUsuarios.getAdapter().getItem(position);
-                usuariosdb.deleteUsuario(nombre);
-                Toast.makeText(getApplicationContext(), "Usuario eliminado", Toast.LENGTH_LONG).show();
+                seleccionado=position;
+                action = usuarios.this.startActionMode(amc);
+                view.setSelected(true);
                 return true;
             }
         });
-        listaUsuarios.setOnItemClickListener(this);
+        //listaUsuarios.setOnItemClickListener(this);
     }
+    private ActionMode.Callback amc = new ActionMode.Callback(){
+
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            getMenuInflater().inflate(R.menu.opciones,menu);
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            //SI LA OPCION ES ELIMINAR
+            if(item.getItemId() == R.id.EliminarItem){
+                String nombre= (String)listaUsuarios.getAdapter().getItem(seleccionado);
+                usuariosdb.deleteUsuario(nombre);
+                Toast.makeText(getApplicationContext(), "Usuario eliminado", Toast.LENGTH_LONG).show();
+            //SI LA OPCION ES EDITAR
+            }else if(item.getItemId() == R.id.EditarItem){
+                String nombre= (String)listaUsuarios.getAdapter().getItem(seleccionado);
+                Toast.makeText(getApplicationContext(), ""+ nombre, Toast.LENGTH_LONG).show();
+                Intent in = new Intent(usuarios.this,Editar.class);
+                in.putExtra("nombre", nombre);
+                startActivity(in);
+            }
+            return false;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+
+        }
+    };
 
     public void agregar(View view){
         Intent agregar= new Intent(this,AgregarUsuario.class);

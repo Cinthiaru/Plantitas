@@ -1,5 +1,6 @@
 package mx.uv.herbolario;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,21 +101,23 @@ public class UsuariosOperaciones {
         return USUARIO;
     }
 
-    public void updateUsuarios(String nombre){
+    public boolean updateUsuarios(String nombre, String usuario, String contrasena){
         ContentValues cv = new ContentValues();
-        cv.put("Field1","Bob"); //These Fields should be your String values of actual column names
-        cv.put("Field2","19");
-        cv.put("Field2","Male");
+        cv.put(DataBaseHelper.USUARIO_NOMBRE,nombre);
+        cv.put(DataBaseHelper.USUARIO_USU,usuario);
+        cv.put(DataBaseHelper.USUARIO_PASSWORD,contrasena);
+        boolean resultado= database.update(DataBaseHelper.USUARIO, cv, DataBaseHelper.USUARIO_USU + "='" + nombre + "'", null)>0;
+        return  resultado;
     }
 
     public Usuario getUsuarioByNombre(String nombre){
-        Cursor cursor = database.query(DataBaseHelper.USUARIO,
-                USUARIOS_TABLE_COLUMNS, DataBaseHelper.USUARIO_USU + " = "
-                        + nombre, null, null, null, null);
-        cursor.moveToFirst();
-        Usuario newComment = parseUsuario(cursor);
+        Cursor cursor = database.rawQuery("SELECT * FROM USUARIO WHERE _usuario='"+nombre+"'",null);
+        Usuario usu= new Usuario();
+        if(cursor.moveToFirst()) {
+            usu=parseUsuario(cursor);
+        }
         cursor.close();
-        return newComment;
+        return usu;
     }
 
     private Usuario parseUsuario(Cursor cursor) {

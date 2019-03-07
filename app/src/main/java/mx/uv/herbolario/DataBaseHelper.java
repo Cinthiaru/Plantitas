@@ -28,6 +28,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String PLANTA_PROPIEDADES = "_propiedades";
     public static final String PLANTA_CONTRAINDI = "_contraindicaciones";
     public static final String PLANTA_IMAGEN = "_imagen";
+    public static final String[] columnas = new String[]{ PLANTA_ID, PLANTA_NOMBRE, PLANTA_NOMBRECIENT, PLANTA_FAMILIA, PLANTA_USOS, PLANTA_DESCRIPCION, PLANTA_PROPIEDADES, PLANTA_CONTRAINDI, PLANTA_IMAGEN} ;
 
 
     //Definición de la base de datos
