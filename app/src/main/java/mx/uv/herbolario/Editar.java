@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class Editar extends AppCompatActivity{
+public class Editar extends AppCompatActivity implements View.OnClickListener{
     private UsuariosOperaciones usu;
     EditText nombreUsuario;
     EditText name;
@@ -23,12 +23,7 @@ public class Editar extends AppCompatActivity{
         name = this.findViewById(R.id.txtNombre);
         contrasena= this.findViewById(R.id.txtContrasena);
         btnActualizar= this.findViewById(R.id.btnActualizar);
-
-        btnActualizar.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Editar();
-            }
-        });
+        btnActualizar.setOnClickListener(this);
 
         String datos="";
         Bundle parametros = this.getIntent().getExtras();
@@ -57,5 +52,10 @@ public class Editar extends AppCompatActivity{
         }
         Intent ventana= new Intent(this, usuarios.class);
         startActivity(ventana);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Editar();
     }
 }
