@@ -90,7 +90,7 @@ public class UsuariosOperaciones {
     public List<String> getAllUsuarios() {
         Cursor cursor = database.query(DataBaseHelper.USUARIO,
                 new String[]{DataBaseHelper.USUARIO_USU}, null, null, null, null, null);
-        
+
         if(cursor.moveToFirst()) {
             do {
                 USUARIO.add(cursor.getString(0));
