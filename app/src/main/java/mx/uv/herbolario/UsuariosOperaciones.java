@@ -101,27 +101,23 @@ public class UsuariosOperaciones {
         return USUARIO;
     }
 
-    public void updateUsuarios(String nombre){
+    public boolean updateUsuarios(String nombre, String usuario, String contrasena){
         ContentValues cv = new ContentValues();
-        cv.put("Field1","Bob"); //These Fields should be your String values of actual column names
-        cv.put("Field2","19");
-        cv.put("Field2","Male");
+        cv.put(DataBaseHelper.USUARIO_NOMBRE,nombre);
+        cv.put(DataBaseHelper.USUARIO_USU,usuario);
+        cv.put(DataBaseHelper.USUARIO_PASSWORD,contrasena);
+        boolean resultado= database.update(DataBaseHelper.USUARIO, cv, DataBaseHelper.USUARIO_USU + "='" + nombre + "'", null)>0;
+        return  resultado;
     }
 
-    public String[] getUsuarioByNombre(String nombre){
-        String listUsuario []= new  String[5];
-        Cursor cursor = database.query(DataBaseHelper.USUARIO,
-                USUARIOS_TABLE_COLUMNS, DataBaseHelper.USUARIO_USU + " = "
-                        + nombre, null, null, null, null);
+    public Usuario getUsuarioByNombre(String nombre){
+        Cursor cursor = database.rawQuery("SELECT * FROM USUARIO WHERE _usuario='"+nombre+"'",null);
+        Usuario usu= new Usuario();
         if(cursor.moveToFirst()) {
-            listUsuario[0] = new String(cursor.getString(0));
-            listUsuario[1] = new String(cursor.getString(1));
-            listUsuario[2] = new String(cursor.getString(2));
-            listUsuario[3] = new String(cursor.getString(3));
-            listUsuario[4] = new String(cursor.getString(4));
+            usu=parseUsuario(cursor);
         }
         cursor.close();
-        return listUsuario;
+        return usu;
     }
 
     private Usuario parseUsuario(Cursor cursor) {
