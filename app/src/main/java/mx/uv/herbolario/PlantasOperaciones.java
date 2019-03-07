@@ -66,12 +66,11 @@ public class PlantasOperaciones {
         Cursor cursor = database.query(DataBaseHelper.PLANTA,
                 new String[]{DataBaseHelper.PLANTA_NOMBRE}, null, null, null, null, null);
         if(cursor.moveToFirst()) {
-            while (cursor.moveToNext()) {
+            do {
                 String linea =
                         "Nombre: " + cursor.getString(0);
                 PLANTA.add(linea);
-                cursor.moveToNext();
-            }
+            }while (cursor.moveToNext());
         }
             cursor.close();
 
