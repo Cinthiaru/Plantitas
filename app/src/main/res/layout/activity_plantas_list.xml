@@ -62,7 +62,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button11"
+        android:id="@+id/botonRegistrarPlanta"
         android:layout_width="93dp"
         android:layout_height="89dp"
         android:layout_marginStart="8dp"
