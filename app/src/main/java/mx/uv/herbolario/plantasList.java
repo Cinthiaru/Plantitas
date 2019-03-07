@@ -3,6 +3,9 @@ package mx.uv.herbolario;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,33 +15,74 @@ import android.widget.Toast;
 import java.util.List;
 
 public class plantasList extends AppCompatActivity implements ListView.OnItemClickListener {
+
     ListView listaPlant;
     ArrayAdapter<String> adapter;
-    PlantasOperaciones plantaDB = new PlantasOperaciones(this) ;
+    private PlantasOperaciones plantaDB;
+    String nombre;
+    private Object action;
+    int seleccionado;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plantas_list);
-        plantaDB= new PlantasOperaciones(this);
+        plantaDB = new PlantasOperaciones(this) ;
         plantaDB.open();
         listaPlant =this.findViewById(R.id.listPlantas);
         cargarListado();
-        borrar();
+        menu();
     }
 
-    public void borrar() {
-        listaPlant.setLongClickable(true);
+    public void menu(){
+        listaPlant.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
         listaPlant.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                String nombre= (String)listaPlant.getAdapter().getItem(position);
-                plantaDB.deletePlanta(nombre);
-                Toast.makeText(getApplicationContext(), "Planta "+nombre+" eliminada", Toast.LENGTH_LONG).show();
+                seleccionado=position;
+                action = plantasList.this.startActionMode(amc);
+                view.setSelected(true);
                 return true;
             }
         });
-        listaPlant.setOnItemClickListener(this);
     }
+
+    private ActionMode.Callback amc = new ActionMode.Callback(){
+
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            getMenuInflater().inflate(R.menu.opciones,menu);
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            //SI LA OPCION ES ELIMINAR
+            if(item.getItemId() == R.id.EliminarItem){
+                String nombre= (String)listaPlant.getAdapter().getItem(seleccionado);
+                plantaDB.deletePlanta(nombre);
+                Toast.makeText(getApplicationContext(), "Planta "+nombre+" eliminada", Toast.LENGTH_LONG).show();
+                //SI LA OPCION ES EDITAR
+            }else if(item.getItemId() == R.id.EditarItem){
+                String nombre= (String)listaPlant.getAdapter().getItem(seleccionado);
+                Intent agregar= new Intent(plantasList.this, AgregarPlanta.class);
+                agregar.putExtra("nombre", nombre);
+                startActivity(agregar);
+            }
+            return false;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+
+        }
+    };
 
      public void cargarListado(){
       List listado = plantaDB.getAllPlantas();
@@ -49,6 +93,7 @@ public class plantasList extends AppCompatActivity implements ListView.OnItemCli
 
     public void agregar(View view){
         Intent agregar= new Intent(this, AgregarPlanta.class);
+        agregar.putExtra("nombre", nombre);
         startActivity(agregar);
     }
 
