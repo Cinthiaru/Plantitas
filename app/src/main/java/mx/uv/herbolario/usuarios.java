@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -78,7 +77,7 @@ public class usuarios extends AppCompatActivity {
 
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            if (item.getItemId() == R.id.EliminarItem ) {
+            if (item.getItemId() == R.id.EliminarItem) {
                 //LLAMA AL METODO ELIMINAR//
 
                 Toast.makeText(getApplicationContext(), "Usuario borrado", Toast.LENGTH_LONG).show();

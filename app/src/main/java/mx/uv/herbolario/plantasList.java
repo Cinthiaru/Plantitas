@@ -25,6 +25,7 @@ public class plantasList extends AppCompatActivity {
      public void cargarListado(){
       List listado = plantaDB.getAllPlantas();
          adapter  = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,listado);
+
          listaPlant.setAdapter(adapter);
       }
 }

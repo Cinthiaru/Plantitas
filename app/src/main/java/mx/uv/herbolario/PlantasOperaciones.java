@@ -65,14 +65,14 @@ public class PlantasOperaciones {
         List<String> PLANTA = new ArrayList<String>();
         Cursor cursor = database.query(DataBaseHelper.PLANTA,
                 new String[]{DataBaseHelper.PLANTA_NOMBRE}, null, null, null, null, null);
-        cursor.moveToFirst();
-            do{
+        if(cursor.moveToFirst()) {
+            while (cursor.moveToNext()) {
                 String linea =
-                        "Nombre: " + cursor.getString(0) ;
+                        "Nombre: " + cursor.getString(0);
                 PLANTA.add(linea);
                 cursor.moveToNext();
-            }while(cursor.moveToNext());
-
+            }
+        }
             cursor.close();
 
         return PLANTA;

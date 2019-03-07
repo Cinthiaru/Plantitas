@@ -5,12 +5,15 @@ import java.util.List;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 public class UsuariosOperaciones {
     // Database fields
+    List<String> USUARIO = new ArrayList<String>();
     private DataBaseHelper dbHelper;
     private String[] USUARIOS_TABLE_COLUMNS = { DataBaseHelper.USUARIO_ID, DataBaseHelper.USUARIO_NOMBRE, DataBaseHelper.USUARIO_ROL, DataBaseHelper.USUARIO_USU, DataBaseHelper.USUARIO_PASSWORD };
     private SQLiteDatabase database;
@@ -71,7 +74,7 @@ public class UsuariosOperaciones {
     public void UsuarioDefault() {
 
         ContentValues values = new ContentValues();
-
+        values.put(DataBaseHelper.USUARIO_ID,"1");
         values.put(DataBaseHelper.USUARIO_NOMBRE, "admin");
         values.put(DataBaseHelper.USUARIO_USU,"admin");
         values.put(DataBaseHelper.USUARIO_PASSWORD,"admin");
@@ -80,15 +83,13 @@ public class UsuariosOperaciones {
         long usuarioId = database.insert(DataBaseHelper.USUARIO, null, values);
     }
 
-    public void deleteUsuario(Usuario comment) {
-        /*long id = comment.getId();
-        System.out.println("Comment deleted with id: " + id);
-        database.delete(DataBaseHelper.USUARIO, DataBaseHelper.USUARIO_ID
-                + " = " + id, null);*/
+    public void deleteUsuario(int seleccionado) {
+        database.execSQL("DELETE FROM USUARIO WHERE _id=" + seleccionado);
+
     }
 
     public List<String> getAllUsuarios() {
-        List<String> USUARIO = new ArrayList<String>();
+
 
         Cursor cursor = database.query(DataBaseHelper.USUARIO,
                 new String[]{DataBaseHelper.USUARIO_USU}, null, null, null, null, null);
