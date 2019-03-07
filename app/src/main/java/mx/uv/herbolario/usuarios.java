@@ -54,8 +54,8 @@ public class usuarios extends AppCompatActivity implements ListView.OnItemClickL
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 //COMO EL ADMIN TIENE ID 1 ENTONCES LE SUMO A LA POSICION//
-                int seleccionado = position+1;
-                usuariosdb.deleteUsuario(seleccionado);
+                String nombre= (String)listaUsuarios.getAdapter().getItem(position);
+                usuariosdb.deleteUsuario(nombre);
                 Toast.makeText(getApplicationContext(), "Usuario eliminado", Toast.LENGTH_LONG).show();
                 return true;
             }

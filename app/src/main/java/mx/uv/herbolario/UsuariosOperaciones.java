@@ -83,9 +83,8 @@ public class UsuariosOperaciones {
         long usuarioId = database.insert(DataBaseHelper.USUARIO, null, values);
     }
 
-    public void deleteUsuario(int seleccionado) {
-        database.execSQL("DELETE FROM USUARIO WHERE _id=" + seleccionado);
-
+    public void deleteUsuario(String seleccionado) {
+        database.execSQL("DELETE FROM USUARIO WHERE _usuario ='" + seleccionado+"'");
     }
 
     public List<String> getAllUsuarios() {
