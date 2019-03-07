@@ -3,6 +3,11 @@ package mx.uv.herbolario;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +15,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 public class AgregarPlanta extends AppCompatActivity {
 
@@ -24,6 +34,7 @@ public class AgregarPlanta extends AppCompatActivity {
     EditText edtImagen;
     Button botonRegistrarPlanta;
     Button botonCargarImagen;
+    ImageView imageView;
     final int REQUEST_CODE_GALLERY = 999;
     int id=0;
 
@@ -46,6 +57,7 @@ public class AgregarPlanta extends AppCompatActivity {
         edtImagen = (EditText) findViewById(R.id.editTextImagen);
         botonRegistrarPlanta = (Button) findViewById(R.id.botonRegistrarPlanta);
         botonCargarImagen = (Button) findViewById(R.id.botonCargarImagen);
+        imageView = (ImageView) findViewById(R.id.imageView);
 
         botonCargarImagen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,5 +159,33 @@ public class AgregarPlanta extends AppCompatActivity {
         Intent ventana= new Intent(this, plantasList.class);
         startActivity(ventana);
 
+    }
+
+    public static byte[] imageViewToByte(ImageView image) {
+        Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream);
+        byte[] byteArray = stream.toByteArray();
+        return byteArray;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(requestCode == REQUEST_CODE_GALLERY && resultCode == RESULT_OK && data != null){
+            Uri uri = data.getData();
+
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(uri);
+
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                imageView.setImageBitmap(bitmap);
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
