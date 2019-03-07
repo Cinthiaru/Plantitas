@@ -1,6 +1,10 @@
 package mx.uv.herbolario;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +23,8 @@ public class AgregarPlanta extends AppCompatActivity {
     EditText edtContraindicaciones;
     EditText edtImagen;
     Button botonRegistrarPlanta;
+    Button botonCargarImagen;
+    final int REQUEST_CODE_GALLERY = 999;
     int id=0;
 
     PlantasOperaciones pla=new PlantasOperaciones(this);
@@ -39,6 +45,18 @@ public class AgregarPlanta extends AppCompatActivity {
         edtContraindicaciones = (EditText) findViewById(R.id.editTextContraindicaciones);
         edtImagen = (EditText) findViewById(R.id.editTextImagen);
         botonRegistrarPlanta = (Button) findViewById(R.id.botonRegistrarPlanta);
+        botonCargarImagen = (Button) findViewById(R.id.botonCargarImagen);
+
+        botonCargarImagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityCompat.requestPermissions(
+                        AgregarPlanta.this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        REQUEST_CODE_GALLERY
+                );
+            }
+        });
 
         Bundle parametros = this.getIntent().getExtras();
         String nombre = parametros.getString("nombre");
@@ -92,6 +110,23 @@ public class AgregarPlanta extends AppCompatActivity {
         Intent ventana= new Intent(this, plantasList.class);
         startActivity(ventana);
 
+    }
+
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        if(requestCode == REQUEST_CODE_GALLERY){
+            if(grantResults.length >0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, REQUEST_CODE_GALLERY);
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "Tú no tienes poder aquí", Toast.LENGTH_SHORT).show();
+            }
+            return;
+        }
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     public void editarPlanta(View view){
