@@ -88,8 +88,6 @@ public class UsuariosOperaciones {
     }
 
     public List<String> getAllUsuarios() {
-
-
         Cursor cursor = database.query(DataBaseHelper.USUARIO,
                 new String[]{DataBaseHelper.USUARIO_USU}, null, null, null, null, null);
         
@@ -100,6 +98,23 @@ public class UsuariosOperaciones {
         }
         cursor.close();
         return USUARIO;
+    }
+
+    public void updateUsuarios(String nombre){
+        ContentValues cv = new ContentValues();
+        cv.put("Field1","Bob"); //These Fields should be your String values of actual column names
+        cv.put("Field2","19");
+        cv.put("Field2","Male");
+    }
+
+    public Usuario getUsuarioByNombre(String nombre){
+        Cursor cursor = database.query(DataBaseHelper.USUARIO,
+                USUARIOS_TABLE_COLUMNS, DataBaseHelper.USUARIO_USU + " = "
+                        + nombre, null, null, null, null);
+        cursor.moveToFirst();
+        Usuario newComment = parseUsuario(cursor);
+        cursor.close();
+        return newComment;
     }
 
     private Usuario parseUsuario(Cursor cursor) {
