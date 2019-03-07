@@ -1,5 +1,6 @@
 package mx.uv.herbolario;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,14 +108,20 @@ public class UsuariosOperaciones {
         cv.put("Field2","Male");
     }
 
-    public Usuario getUsuarioByNombre(String nombre){
+    public String[] getUsuarioByNombre(String nombre){
+        String listUsuario []= new  String[5];
         Cursor cursor = database.query(DataBaseHelper.USUARIO,
                 USUARIOS_TABLE_COLUMNS, DataBaseHelper.USUARIO_USU + " = "
                         + nombre, null, null, null, null);
-        cursor.moveToFirst();
-        Usuario newComment = parseUsuario(cursor);
+        if(cursor.moveToFirst()) {
+            listUsuario[0] = new String(cursor.getString(0));
+            listUsuario[1] = new String(cursor.getString(1));
+            listUsuario[2] = new String(cursor.getString(2));
+            listUsuario[3] = new String(cursor.getString(3));
+            listUsuario[4] = new String(cursor.getString(4));
+        }
         cursor.close();
-        return newComment;
+        return listUsuario;
     }
 
     private Usuario parseUsuario(Cursor cursor) {

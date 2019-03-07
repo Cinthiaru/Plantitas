@@ -84,6 +84,7 @@ public class usuarios extends AppCompatActivity implements ListView.OnItemClickL
             //SI LA OPCION ES EDITAR
             }else if(item.getItemId() == R.id.EditarItem){
                 String nombre= (String)listaUsuarios.getAdapter().getItem(seleccionado);
+                Toast.makeText(getApplicationContext(), ""+ nombre, Toast.LENGTH_LONG).show();
                 Intent in = new Intent(usuarios.this,Editar.class);
                 in.putExtra("nombre", nombre);
                 startActivity(in);
