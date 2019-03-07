@@ -19,6 +19,7 @@ public class AgregarPlanta extends AppCompatActivity {
     EditText edtContraindicaciones;
     EditText edtImagen;
     Button botonRegistrarPlanta;
+    int id=0;
 
     PlantasOperaciones pla=new PlantasOperaciones(this);
 
@@ -46,6 +47,7 @@ public class AgregarPlanta extends AppCompatActivity {
             pl=pla.getPlanta(nombre);
             pla.close();
 
+
             edtNombre.setText(pl.getNombre());
             edtNombreCientifico.setText(pl.getNombreCientifico());
             edtFamilia.setText(pl.getFamilia());
@@ -54,6 +56,7 @@ public class AgregarPlanta extends AppCompatActivity {
             edtPropiedades.setText(pl.getPropiedades());
             edtContraindicaciones.setText(pl.getContraindicaciones());
             edtImagen.setText(pl.getImagen());
+            id=pl.getId();
 
             Toast.makeText(getApplicationContext(),nombre,Toast.LENGTH_LONG).show();
             botonRegistrarPlanta.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +105,7 @@ public class AgregarPlanta extends AppCompatActivity {
         String imagen = edtImagen.getText().toString();
 
         pla.open();
-        if(pla.updatePlanta(nombre, nombreCientifico, familia, usos, descripcion, propiedades, contraindicaciones, imagen)){
+        if(pla.updatePlanta(id, nombre, nombreCientifico, familia, usos, descripcion, propiedades, contraindicaciones, imagen)){
             Toast.makeText(getApplicationContext(),"Actualización exitosa.",Toast.LENGTH_LONG).show();
         }
         pla.close();

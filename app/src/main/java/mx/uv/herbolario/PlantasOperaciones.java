@@ -61,7 +61,7 @@ public class PlantasOperaciones {
         return newComment;
     }
 
-    public boolean updatePlanta(String nombre, String nombreCientifico, String familia, String usos,
+    public boolean updatePlanta(int id, String nombre, String nombreCientifico, String familia, String usos,
                              String descripcion, String propiedades, String contraindicaciones,
                              String imagen){
         ContentValues values = new ContentValues();
@@ -75,7 +75,7 @@ public class PlantasOperaciones {
         values.put(DataBaseHelper.PLANTA_CONTRAINDI, contraindicaciones);
         values.put(DataBaseHelper.PLANTA_IMAGEN, imagen);
 
-        boolean estado = database.update(DataBaseHelper.PLANTA, values, DataBaseHelper.PLANTA_NOMBRE + "='" + nombre + "'", null)>0;
+        boolean estado = database.update(DataBaseHelper.PLANTA, values, DataBaseHelper.PLANTA_ID + "='" + id + "'", null)>0;
 
         return estado;
     }
